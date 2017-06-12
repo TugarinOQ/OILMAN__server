@@ -48,8 +48,8 @@ router.post('/login', (req, res) => {
             res.json({ error: 'Authentication failed. User not found.' });
         } else if (user) {
 
-            User.verifyPassword(pass, (success) => {
-                if (!success) res.json({ error: 'Authentication failed. Wrong password.' });
+            User.verifyPassword(pass, (err, success) => {
+                if (err || !success) return res.json({ error: 'Authentication failed. Wrong password.' });
 
                 const token = jwt.sign({ email: user.email }, 'yqawv8nqi5', {
                     expiresIn: '1 day' // expires in 24 hours
@@ -59,7 +59,7 @@ router.post('/login', (req, res) => {
                     success: true,
                     token: token
                 });
-            });
+            }, user.password);
         }
 
     });
