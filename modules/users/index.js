@@ -65,6 +65,11 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.post('/forgot', (req, res) => {
+
+    //
+});
+
 router.get('/info', token__module.isValid, (req, res) => {
 
     console.log('info');
