@@ -32,6 +32,8 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
 
+    console.log(req.body.email || "empty");
+
     const emailOrLogin = req.body.email || "";
     const pass = req.body.password || "";
 
